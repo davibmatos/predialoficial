@@ -15,7 +15,7 @@ class CadSindicosController extends Controller
    }
 
    public function create(){
-    return view('painel-adm.sindicos.index')
+    return view('painel-adm.sindicos.index');
    }
 
    public function insert(Request $request){

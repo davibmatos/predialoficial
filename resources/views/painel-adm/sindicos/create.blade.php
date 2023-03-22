@@ -5,7 +5,7 @@
 @extends('template.painel-admin')
 @section('title', 'Inserir Instrutores')
 @section('content')
-<h6 class="mb-4"><i>CADASTRO DE INSTRUTORES</i></h6><hr>
+<h6 class="mb-4"><i>CADASTRO DE SINDICOS</i></h6><hr>
 <form method="POST" action="{{route('sindicos.insert')}}">
         @csrf
 
