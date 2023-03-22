@@ -21,7 +21,12 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::post('painel', [UsuariosController::class, 'login'])->name('usuarios.login');
 Route::get('/', [UsuariosController::class, 'logout'])->name('usuarios.logout');
+
 Route::put('admin/{usuario}', [AdminController::class, 'editar'])->name('admin.editar');
-Route::get('sindicos', [CadSindicosController::class, 'index'])->name('sindicos.index');
 Route::get('home-admin', [AdminController::class, 'index'])->name('admin.index');
+
+Route::get('sindicos', [CadSindicosController::class, 'index'])->name('sindicos.index');
+Route::post('sindicos.insert', [CadSindicosController::class, 'insert'])->name('sindicos.insert');
+Route::get('sindicos.inserir', [CadSindicosController::class, 'create'])->name('sindicos.inserir');
+
 

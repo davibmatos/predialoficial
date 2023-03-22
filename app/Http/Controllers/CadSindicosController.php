@@ -13,4 +13,13 @@ class CadSindicosController extends Controller
     return view ('painel-adm.sindicos.index', ['itens' => $tabela]);
 
    }
+
+   public function create(){
+    return view('painel-adm.sindicos.index')
+   }
+
+   public function insert(Request $request){
+    $sindico = new sindico();
+
+   }
 }

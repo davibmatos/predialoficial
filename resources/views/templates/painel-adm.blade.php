@@ -2,10 +2,10 @@
 
 use App\Models\usuario;
 
-@session_start(); 
+@session_start();
 $id_usuario = @$_SESSION['id_usuario'];
 $usuario = usuario::find($id_usuario);
-echo $usuario->nome;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -152,7 +152,7 @@ echo $usuario->nome;
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo @$_SESSION['nome_usuario']; ?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $usuario->nome }}</span>
                                 <img class="img-profile rounded-circle" src="{{ URL::asset('img/sem-foto.jpg') }}">
 
                             </a>
@@ -220,7 +220,7 @@ echo $usuario->nome;
 
 
 
-                <form id="form-perfil" method="POST" action="{{route('admin.editar', $id_usuario)}}">
+                <form id="form-perfil" method="POST" action="{{ route('admin.editar', $id_usuario) }}">
                     @csrf
                     @method('put');
                     <div class="modal-body">
@@ -228,25 +228,25 @@ echo $usuario->nome;
 
                         <div class="form-group">
                             <label>Nome</label>
-                            <input value="{{$usuario->nome}}" type="text" class="form-control" id="nome" name="nome"
-                                placeholder="Nome">
+                            <input value="{{ $usuario->nome }}" type="text" class="form-control" id="nome"
+                                name="nome" placeholder="Nome">
                         </div>
 
                         <div class="form-group">
                             <label>CPF</label>
-                            <input value="{{$usuario->cpf}}" type="text" class="form-control" id="cpf" name="cpf"
-                                placeholder="CPF">
+                            <input value="{{ $usuario->cpf }}" type="text" class="form-control" id="cpf"
+                                name="cpf" placeholder="CPF">
                         </div>
 
                         <div class="form-group">
                             <label>Email</label>
-                            <input value="{{$usuario->email}}" type="email" class="form-control" id="email" name="email"
-                                placeholder="Email">
+                            <input value="{{ $usuario->email }}" type="email" class="form-control" id="email"
+                                name="email" placeholder="Email">
                         </div>
 
                         <div class="form-group">
                             <label>Senha</label>
-                            <input value="{{$usuario->senha}}" type="text" class="form-control" id="text"
+                            <input value="{{ $usuario->senha }}" type="text" class="form-control" id="text"
                                 name="senha" placeholder="Senha">
                         </div>
                     </div>
