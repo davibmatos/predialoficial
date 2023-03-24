@@ -15,7 +15,11 @@ if(!isset($id)){
 
 
 <a href="{{route('sindicos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Síndico</a>
-
+@if ($errors->has('error'))
+    <div class="alert alert-danger mt-2">
+        {{ $errors->first('error') }}
+    </div>
+@endif
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 
@@ -40,7 +44,7 @@ if(!isset($id)){
             <td>{{$item->email}}</td>
             <td>{{$item->cpf}}</td>
             <td>{{$item->telefone}}</td>
-            <td>{{$item->vencimento}}</td>
+            <td>{{ (new DateTime($item->data))->format('d/m/Y') }}</td>
             <td>            
             <a href=""><i class="fas fa-edit text-info mr-1"></i></a>
             <a href=""><i class="fas fa-trash text-danger mr-1"></i></a>

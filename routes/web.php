@@ -27,6 +27,9 @@ Route::get('home-admin', [AdminController::class, 'index'])->name('admin.index')
 
 Route::get('sindicos', [CadSindicosController::class, 'index'])->name('sindicos.index');
 Route::post('sindicos.insert', [CadSindicosController::class, 'insert'])->name('sindicos.insert');
-Route::get('sindicos.inserir', [CadSindicosController::class, 'create'])->name('sindicos.inserir');
+Route::get('sindicos/inserir', [CadSindicosController::class, 'create'])->name('sindicos.inserir');
+Route::put('sindicos/{sindico}', [CadSindicosController::class, 'editar'])->name('sindicos.editar');
+Route::get('sindicos/{sindico/edit}', [CadSindicosController::class, 'edit'])->name('sindicos.edit');
+
 
 

@@ -1,8 +1,4 @@
 @extends('templates.painel-adm')
-@section('title', 'Sindicos')
-@section('content')
-
-@extends('template.painel-admin')
 @section('title', 'Inserir Instrutores')
 @section('content')
 <h6 class="mb-4"><i>CADASTRO DE SINDICOS</i></h6><hr>
@@ -61,6 +57,4 @@
         <button type="submit" class="btn btn-primary">Salvar</button>
         </p>
     </form>
-@endsection
-
 @endsection
