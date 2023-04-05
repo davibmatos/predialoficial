@@ -1,8 +1,8 @@
 @extends('templates.painel-adm')
-@section('title', 'Inserir Instrutores')
+@section('title', 'Inserir Inquilinos')
 @section('content')
-<h6 class="mb-4"><i>CADASTRO DE SINDICOS</i></h6><hr>
-<form method="POST" action="{{route('sindicos.insert')}}">
+<h6 class="mb-4"><i>CADASTRO DE INQUILINOS</i></h6><hr>
+<form method="POST" action="{{route('inquilinos.insert')}}">
         @csrf
 
         <div class="row">
@@ -37,15 +37,15 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Credencial</label>
-                    <input type="text" class="form-control" id="" name="credencial">
+                    <label for="exampleInputEmail1">Endereço</label>
+                    <input type="text" class="form-control" id="" name="endereco">
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Vencimento Credencial</label>
-                    <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data" name="data">
+                    <label for="exampleInputEmail1">Apartamento</label>
+                    <input type="text" class="form-control" id="" name="apartamento">
                 </div>
             </div>
 
