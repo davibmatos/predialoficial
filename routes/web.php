@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ApartamentosController;
 use App\Http\Controllers\CadSindicosController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImoveisController;
+use App\Http\Controllers\InquilinosController;
 use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Js;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +29,45 @@ Route::get('/', [UsuariosController::class, 'logout'])->name('usuarios.logout');
 Route::put('admin/{usuario}', [AdminController::class, 'editar'])->name('admin.editar');
 Route::get('home-admin', [AdminController::class, 'index'])->name('admin.index');
 
+//ROTAS DE SINDICOS
 Route::get('sindicos', [CadSindicosController::class, 'index'])->name('sindicos.index');
-Route::post('sindicos.insert', [CadSindicosController::class, 'insert'])->name('sindicos.insert');
+Route::post('sindicos', [CadSindicosController::class, 'insert'])->name('sindicos.insert');
 Route::get('sindicos/inserir', [CadSindicosController::class, 'create'])->name('sindicos.inserir');
-Route::put('sindicos/{sindico}', [CadSindicosController::class, 'editar'])->name('sindicos.editar');
-Route::get('sindicos/{sindico/edit}', [CadSindicosController::class, 'edit'])->name('sindicos.edit');
+Route::put('sindicos/{item}', [CadSindicosController::class, 'editar'])->name('sindicos.editar');
+Route::get('sindicos/{item}/edit}', [CadSindicosController::class, 'edit'])->name('sindicos.edit');
+Route::get('sindicos/{item}/delete}', [CadSindicosController::class, 'modal'])->name('sindicos.modal');
+Route::delete('sindicos/{item}', [CadSindicosController::class, 'delete'])->name('sindicos.delete');
+
+//ROTAS DE INQUILINOS
+Route::get('inquilinos', [InquilinosController::class, 'index'])->name('inquilinos.index');
+Route::post('inquilinos', [InquilinosController::class, 'insert'])->name('inquilinos.insert');
+Route::get('inquilinos/inserir', [InquilinosController::class, 'create'])->name('inquilinos.inserir');
+Route::put('inquilinos/{item}', [InquilinosController::class, 'editar'])->name('inquilinos.editar');
+Route::get('inquilinos/{item}/edit}', [InquilinosController::class, 'edit'])->name('inquilinos.edit');
+Route::get('inquilinos/{item}/delete}', [InquilinosController::class, 'modal'])->name('inquilinos.modal');
+Route::delete('inquilinos/{item}', [InquilinosController::class, 'delete'])->name('inquilinos.delete');
+
+//ROTAS DE IMOVEIS
+Route::get('imoveis', [ImoveisController::class, 'index'])->name('imoveis.index');
+Route::post('imoveis', [ImoveisController::class, 'insert'])->name('imoveis.insert');
+Route::get('imoveis/inserir', [ImoveisController::class, 'create'])->name('imoveis.inserir');
+Route::put('imoveis/{item}', [ImoveisController::class, 'editar'])->name('imoveis.editar');
+Route::get('imoveis/{item}/edit}', [ImoveisController::class, 'edit'])->name('imoveis.edit');
+Route::get('imoveis/{item}/delete}', [ImoveisController::class, 'modal'])->name('imoveis.modal');
+Route::delete('imoveis/{item}', [ImoveisController::class, 'delete'])->name('imoveis.delete');
+
+//ROTAS DE APARTAMENTOS
+Route::get('apartamentos', [ApartamentosController::class, 'index'])->name('apartamentos.index');
+Route::post('apartamentos', [ApartamentosController::class, 'insert'])->name('apartamentos.insert');
+Route::get('apartamentos/inserir', [ApartamentosController::class, 'create'])->name('apartamentos.inserir');
+Route::put('apartamentos/{item}', [ApartamentosController::class, 'editar'])->name('apartamentos.editar');
+Route::get('apartamentos/{item}/edit}', [ApartamentosController::class, 'edit'])->name('apartamentos.edit');
+Route::get('apartamentos/{item}/delete}', [ApartamentosController::class, 'modal'])->name('apartamentos.modal');
+Route::delete('apartamentos/{item}', [ApartamentosController::class, 'delete'])->name('apartamentos.delete');
+
+
+
+
 
 
 

@@ -68,14 +68,19 @@ $usuario = usuario::find($id_usuario);
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('sindicos.index') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Cadastros de Síndicos</span></a>
+                    <span>Síndicos</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('inquilinos.index') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Cadastros de Inquilinos</span></a>
+                    <span>Inquilinos</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('inquilinos.index') }}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Usuários</span></a>
             </li>
 
 
@@ -86,14 +91,14 @@ $usuario = usuario::find($id_usuario);
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('imoveis.index') }}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Cadastro de Imóveis</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('apartamentos.index') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Cadastro de Apartamentos</span></a>
             </li>
@@ -289,6 +294,7 @@ $usuario = usuario::find($id_usuario);
     <script src="{{ URL::asset('js/demo/datatables-demo.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script src="{{ URL::asset('js/mascaras.js') }}"></script>
 
 </body>
