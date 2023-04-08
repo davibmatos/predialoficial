@@ -1,15 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
 use App\Models\inquilino;
 use App\Models\sindico;
 use App\Models\usuario;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class InquilinosController extends Controller
 {
+    public function buscarPorCpf($cpf = null) 
+{
+    if (!$cpf) {
+        return new JsonResponse(null, 400); 
+    }
+
+    $inquilino = Inquilino::where('cpf', $cpf)->first();
+    return new JsonResponse($inquilino);
+}
+    
     public function index()
     {
         $tabela = inquilino::orderBy('id', 'desc')->paginate();
@@ -27,13 +39,13 @@ class InquilinosController extends Controller
         $tabela = new inquilino();
         $tabela->nome = $request->nome;
         $tabela->email = $request->email;
-        $tabela->cpf = $request->cpf;
+        $tabela->cpf = preg_replace('/[^0-9]/', '', $request->cpf);
         $tabela->telefone = $request->telefone;
 
         $tabela2 = new usuario();
         $tabela2->nome = $request->nome;
         $tabela2->email = $request->email;
-        $tabela2->cpf = $request->cpf;
+        $tabela2->cpf = preg_replace('/[^0-9]/', '', $request->cpf);
         $tabela2->telefone = $request->telefone;
         $tabela2->senha = $request->cpf;
         $tabela2->nivel = 'inquilino';

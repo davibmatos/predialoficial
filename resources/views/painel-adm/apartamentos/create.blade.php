@@ -19,7 +19,7 @@
                 <select class="form-control" id="imovel_id" name="imovel_id" required>
                     <option value="">Selecione um imóvel</option>
                     @foreach($imoveis as $imovel)
-                        <option value="{{ $imovel->id }}">{{ $imovel->nome }}</option>
+                        <option value="{{ $imovel->id }}">{{ $imovel->edificio }}</option>
                     @endforeach
                 </select>
             </div>

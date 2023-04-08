@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApartamentosController;
 use App\Http\Controllers\CadSindicosController;
+use App\Http\Controllers\ContratosController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImoveisController;
 use App\Http\Controllers\InquilinosController;
@@ -65,6 +66,17 @@ Route::get('apartamentos/{item}/edit}', [ApartamentosController::class, 'edit'])
 Route::get('apartamentos/{item}/delete}', [ApartamentosController::class, 'modal'])->name('apartamentos.modal');
 Route::delete('apartamentos/{item}', [ApartamentosController::class, 'delete'])->name('apartamentos.delete');
 
+//ROTAS DE CONTRATOS
+Route::get('contratos', [ContratosController::class, 'index'])->name('contratos.index');
+Route::post('contratos', [ContratosController::class, 'insert'])->name('contratos.insert');
+Route::get('contratos/inserir', [ContratosController::class, 'create'])->name('contratos.inserir');
+Route::put('contratos/{item}', [ContratosController::class, 'editar'])->name('contratos.editar');
+Route::get('contratos/{item}/edit}', [ContratosController::class, 'edit'])->name('contratos.edit');
+Route::get('contratos/{item}/delete}', [ContratosController::class, 'modal'])->name('contratos.modal');
+Route::delete('contratos/{item}', [ContratosController::class, 'delete'])->name('contratos.delete');
+Route::get('inquilinos/por-cpf/{cpf?}', [InquilinosController::class, 'buscarPorCpf'])->name('inquilinos.por_cpf');
+Route::get('/imoveis/edificios', [ImoveisController::class, 'getEdificios'])->name('imoveis.edificios');
+Route::get('/imoveis/{edificio}/apartamentos', [ImoveisController::class, 'getApartamentos'])->name('imoveis.apartamentos');
 
 
 
