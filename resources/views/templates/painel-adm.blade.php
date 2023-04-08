@@ -104,9 +104,9 @@ $usuario = usuario::find($id_usuario);
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('contratos.index') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Painel Financeiro</span></a>
+                    <span>Contratos</span></a>
             </li>
 
             <li class="nav-item">
@@ -296,6 +296,8 @@ $usuario = usuario::find($id_usuario);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script src="{{ URL::asset('js/mascaras.js') }}"></script>
+    <script src="{{ URL::asset('js/buscar_inquilino.js') }}"></script>
+    @yield('scripts')
 
 </body>
 

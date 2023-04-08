@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apartamentos;
 use App\Models\imoveis;
 use App\Models\inquilino;
 use App\Models\sindico;
 use App\Models\usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ImoveisController extends Controller
 {
@@ -19,18 +21,33 @@ class ImoveisController extends Controller
 
     public function create()
     {
-        return view('painel-adm.imoveis.create');
+        $edificios = Imoveis::select('edificio')->distinct()->get();
+        return view('painel-adm.imoveis.create', ['edificios' => $edificios]);
+    }
+
+    public function getEdificios()
+    {
+        $edificios = Imoveis::select('edificio')->distinct()->get();
+        return response()->json($edificios);
+    }
+
+    public function getApartamentos($edificio)
+    {
+        Log::info('getApartamentos called with edificio: ' . $edificio);
+        $imovel = Imoveis::where('edificio', $edificio)->first();
+        $apartamentos = Apartamentos::where('imovel_id', $imovel->id)->get();
+        return response()->json($apartamentos->makeVisible('valor')); 
     }
 
     public function insert(Request $request)
     {
-        
+
         $tabela = new imoveis();
         $tabela->nome = $request->nome;
         $tabela->matricula = $request->matricula;
         $tabela->endereco = $request->endereco;
         $tabela->bairro = $request->bairro;
-        $tabela->numero = $request->numero;       
+        $tabela->numero = $request->numero;
 
         $itens = imoveis::where('nome', '=', $request->nome)->first();
 
@@ -43,53 +60,54 @@ class ImoveisController extends Controller
         return redirect()->route('imoveis.index');
     }
 
-    public function edit(imoveis $item){
-        return view('painel-adm.imoveis.edit', ['item' => $item]);   
-     }
- 
- 
-     public function editar(Request $request, imoveis $item){
-         
+    public function edit(imoveis $item)
+    {
+        return view('painel-adm.imoveis.edit', ['item' => $item]);
+    }
+
+
+    public function editar(Request $request, imoveis $item)
+    {
+
         $item->nome = $request->nome;
         $item->matricula = $request->matricula;
         $item->endereco = $request->endereco;
         $item->bairro = $request->bairro;
         $item->numero = $request->numero;
-       
+
 
         $oldnome = $request->oldnome;
         $oldmatricula = $request->oldmatricula;
 
-        if($oldnome != $request->nome){
+        if ($oldnome != $request->nome) {
             $itens = imoveis::where('nome', '=', $request->nome)->count();
-            if($itens > 0){
+            if ($itens > 0) {
                 echo "<script language='javascript'> window.alert('Nome já Cadastrado!') </script>";
-                return view('painel-adm.imoveis.edit', ['item' => $item]);   
-                
+                return view('painel-adm.imoveis.edit', ['item' => $item]);
             }
-        } 
+        }
 
-        if($oldmatricula != $request->matricula){
+        if ($oldmatricula != $request->matricula) {
             $itens = imoveis::where('nome', '=', $request->matricula)->count();
-            if($itens > 0){
+            if ($itens > 0) {
                 echo "<script language='javascript'> window.alert('Essa matrícula já existe!') </script>";
-                return view('painel-adm.imoveis.edit', ['item' => $item]);   
-                
+                return view('painel-adm.imoveis.edit', ['item' => $item]);
             }
-        } 
+        }
 
         $item->save();
-         return redirect()->route('imoveis.index');
- 
-     }
+        return redirect()->route('imoveis.index');
+    }
 
-     public function delete(imoveis $item){
+    public function delete(imoveis $item)
+    {
         $item->delete();
         return redirect()->route('imoveis.index');
-     }
+    }
 
-     public function modal($id){
+    public function modal($id)
+    {
         $item = imoveis::orderby('id', 'desc')->paginate();
         return view('painel-adm.imoveis.index', ['itens' => $item, 'id' => $id]);
-     } 
+    }
 }

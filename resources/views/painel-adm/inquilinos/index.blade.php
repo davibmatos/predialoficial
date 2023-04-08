@@ -41,7 +41,7 @@ if(!isset($id)){
          <tr>
             <td>{{$item->nome}}</td>
             <td>{{$item->email}}</td>
-            <td>{{$item->cpf}}</td>
+            <td>{{preg_replace("/^(\d{3})(\d{3})(\d{3})(\d{2})$/", "$1.$2.$3-$4", $item->cpf)}}</td>
             <td>{{$item->telefone}}</td>
             <td>            
             <a href="{{route('inquilinos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
