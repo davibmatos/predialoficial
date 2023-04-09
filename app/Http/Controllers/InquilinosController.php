@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
@@ -12,16 +13,23 @@ use Illuminate\Http\Request;
 
 class InquilinosController extends Controller
 {
-    public function buscarPorCpf($cpf = null) 
-{
-    if (!$cpf) {
-        return new JsonResponse(null, 400); 
+    public function buscarPorCpf($cpf = null)
+    {
+        if (!$cpf) {
+            return new JsonResponse(null, 400);
+        }
+
+        $cpf = preg_replace('/[^0-9]/', '', $cpf); 
+
+        Log::info('Buscando inquilinos com CPF:', ['cpf' => $cpf]);
+
+        $inquilinos = Inquilino::where('cpf', $cpf)->get();
+
+        Log::info('Inquilinos encontrados:', ['inquilinos' => $inquilinos]);
+
+        return new JsonResponse($inquilinos);
     }
 
-    $inquilino = Inquilino::where('cpf', $cpf)->first();
-    return new JsonResponse($inquilino);
-}
-    
     public function index()
     {
         $tabela = inquilino::orderBy('id', 'desc')->paginate();
@@ -35,7 +43,7 @@ class InquilinosController extends Controller
 
     public function insert(Request $request)
     {
-        
+
         $tabela = new inquilino();
         $tabela->nome = $request->nome;
         $tabela->email = $request->email;
@@ -62,52 +70,53 @@ class InquilinosController extends Controller
         return redirect()->route('inquilinos.index');
     }
 
-    public function edit(inquilino $item){
-        return view('painel-adm.inquilinos.edit', ['item' => $item]);   
-     }
- 
- 
-     public function editar(Request $request, inquilino $item){
-         
+    public function edit(inquilino $item)
+    {
+        return view('painel-adm.inquilinos.edit', ['item' => $item]);
+    }
+
+
+    public function editar(Request $request, inquilino $item)
+    {
+
         $item->nome = $request->nome;
         $item->email = $request->email;
         $item->cpf = $request->cpf;
         $item->telefone = $request->telefone;
-       
+
 
         $oldcpf = $request->oldcpf;
         $oldemail = $request->oldemail;
 
-        if($oldcpf != $request->cpf){
+        if ($oldcpf != $request->cpf) {
             $itens = inquilino::where('cpf', '=', $request->cpf)->count();
-            if($itens > 0){
+            if ($itens > 0) {
                 echo "<script language='javascript'> window.alert('CPF já Cadastrado!') </script>";
-                return view('painel-adm.inquilinos.edit', ['item' => $item]);   
-                
+                return view('painel-adm.inquilinos.edit', ['item' => $item]);
             }
         }
 
-        if($oldemail != $request->email){
+        if ($oldemail != $request->email) {
             $itens = inquilino::where('email', '=', $request->email)->count();
-            if($itens > 0){
+            if ($itens > 0) {
                 echo "<script language='javascript'> window.alert('Email já Cadastrado!') </script>";
-                return view('painel-adm.inquilinos.edit', ['item' => $item]);   
-                
+                return view('painel-adm.inquilinos.edit', ['item' => $item]);
             }
-        }     
+        }
 
         $item->save();
-         return redirect()->route('inquilinos.index');
- 
-     }
+        return redirect()->route('inquilinos.index');
+    }
 
-     public function delete(inquilino $item){
+    public function delete(inquilino $item)
+    {
         $item->delete();
         return redirect()->route('inquilinos.index');
-     }
+    }
 
-     public function modal($id){
+    public function modal($id)
+    {
         $item = inquilino::orderby('id', 'desc')->paginate();
         return view('painel-adm.inquilinos.index', ['itens' => $item, 'id' => $id]);
-     } 
+    }
 }

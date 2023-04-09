@@ -865,3 +865,62 @@
 [2023-04-08 00:45:21] local.INFO: Inserindo contrato {"_token":"KeiaCapRCENECA2oGYYiyeEsjBP7nQtnWs0QWxYq","cpf":"111.111.111-12","inquilino_id":"2","nome":"inquilino3","telefone":"(11) 11111-1111","edificio":"Helbor","apartamento_id":"2","valor":"200","vencimento":"2023-04-04"} 
 [2023-04-08 00:45:21] local.INFO: Inserindo contrato {"_token":"KeiaCapRCENECA2oGYYiyeEsjBP7nQtnWs0QWxYq","cpf":"111.111.111-12","inquilino_id":"2","nome":"inquilino3","telefone":"(11) 11111-1111","edificio":"Helbor","apartamento_id":"2","valor":"200","vencimento":"2023-04-04"} 
 [2023-04-08 00:45:21] local.INFO: Valor de inquilino_id ["2"] 
+[2023-04-08 14:08:47] local.INFO: getApartamentos called with edificio: Helbor  
+[2023-04-08 14:18:07] local.INFO: getApartamentos called with edificio: Helbor  
+[2023-04-08 14:18:23] local.INFO: Buscando inquilinos com CPF: {"cpf":"33333333333"} 
+[2023-04-08 14:18:23] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":5,"nome":"alana souza","cpf":"33333333333","email":"alanasouza@hotmail.com","telefone":"(33) 33333-3333","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:18:25] local.INFO: Buscando inquilinos com CPF: {"cpf":"333.333.333-33"} 
+[2023-04-08 14:18:25] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[]}} 
+[2023-04-08 14:19:09] local.INFO: Buscando inquilinos com CPF: {"cpf":"33333333333"} 
+[2023-04-08 14:19:10] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":5,"nome":"alana souza","cpf":"33333333333","email":"alanasouza@hotmail.com","telefone":"(33) 33333-3333","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:19:11] local.INFO: Buscando inquilinos com CPF: {"cpf":"333.333.333-33"} 
+[2023-04-08 14:19:11] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[]}} 
+[2023-04-08 14:19:22] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:19:22] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[]}} 
+[2023-04-08 14:19:24] local.INFO: Buscando inquilinos com CPF: {"cpf":"111.111.111-12"} 
+[2023-04-08 14:19:24] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":2,"nome":"inquilino3","cpf":"111.111.111-12","email":"inquilino1@hotmail.com","telefone":"(11) 11111-1111","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:21:15] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:21:15] local.INFO: Inquilinos encontrados: {"inquilinos":null} 
+[2023-04-08 14:21:17] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:21:17] local.INFO: Inquilinos encontrados: {"inquilinos":null} 
+[2023-04-08 14:21:25] local.INFO: Buscando inquilinos com CPF: {"cpf":"33333333333"} 
+[2023-04-08 14:21:25] local.INFO: Inquilinos encontrados: {"inquilinos":{"App\\Models\\Inquilino":{"id":5,"nome":"alana souza","cpf":"33333333333","email":"alanasouza@hotmail.com","telefone":"(33) 33333-3333","senha":null,"endereco":null,"apartamento":null,"docs":null}}} 
+[2023-04-08 14:21:27] local.INFO: Buscando inquilinos com CPF: {"cpf":"33333333333"} 
+[2023-04-08 14:21:27] local.INFO: Inquilinos encontrados: {"inquilinos":{"App\\Models\\Inquilino":{"id":5,"nome":"alana souza","cpf":"33333333333","email":"alanasouza@hotmail.com","telefone":"(33) 33333-3333","senha":null,"endereco":null,"apartamento":null,"docs":null}}} 
+[2023-04-08 14:29:36] local.INFO: getApartamentos called with edificio: Helbor  
+[2023-04-08 14:30:49] local.INFO: Buscando inquilinos com CPF: {"cpf":"12312312312"} 
+[2023-04-08 14:30:49] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":4,"nome":"davi matos","cpf":"12312312312","email":"davimatos@hotmail.com","telefone":"(12) 31231-2312","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:30:50] local.INFO: Buscando inquilinos com CPF: {"cpf":"12312312312"} 
+[2023-04-08 14:30:50] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":4,"nome":"davi matos","cpf":"12312312312","email":"davimatos@hotmail.com","telefone":"(12) 31231-2312","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:30:56] local.INFO: Buscando inquilinos com CPF: {"cpf":"33333333333"} 
+[2023-04-08 14:30:56] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":5,"nome":"alana souza","cpf":"33333333333","email":"alanasouza@hotmail.com","telefone":"(33) 33333-3333","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:30:57] local.INFO: Buscando inquilinos com CPF: {"cpf":"33333333333"} 
+[2023-04-08 14:30:57] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":5,"nome":"alana souza","cpf":"33333333333","email":"alanasouza@hotmail.com","telefone":"(33) 33333-3333","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:31:08] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111111"} 
+[2023-04-08 14:31:08] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[]}} 
+[2023-04-08 14:31:09] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111111"} 
+[2023-04-08 14:31:09] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[]}} 
+[2023-04-08 14:31:15] local.INFO: Buscando inquilinos com CPF: {"cpf":"12312312312"} 
+[2023-04-08 14:31:15] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":4,"nome":"davi matos","cpf":"12312312312","email":"davimatos@hotmail.com","telefone":"(12) 31231-2312","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:31:17] local.INFO: Buscando inquilinos com CPF: {"cpf":"12312312312"} 
+[2023-04-08 14:31:17] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":4,"nome":"davi matos","cpf":"12312312312","email":"davimatos@hotmail.com","telefone":"(12) 31231-2312","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:31:58] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:31:58] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":2,"nome":"inquilino3","cpf":"11111111112","email":"inquilino1@hotmail.com","telefone":"(11) 11111-1111","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:31:59] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:31:59] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":2,"nome":"inquilino3","cpf":"11111111112","email":"inquilino1@hotmail.com","telefone":"(11) 11111-1111","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:32:04] local.INFO: getApartamentos called with edificio: Helbor  
+[2023-04-08 14:32:12] local.INFO: Inserindo contrato {"_token":"xq1Z76DzY8aQ3drB4uQnkZoanUPjV2dBrZC2u8zh","cpf":"111.111.111-12","inquilino_id":"2","nome":"inquilino3","telefone":"(11) 11111-1111","edificio":"Helbor","apartamento_id":"2","valor":"200","vencimento":"2023-05-20"} 
+[2023-04-08 14:32:13] local.INFO: Inserindo contrato {"_token":"xq1Z76DzY8aQ3drB4uQnkZoanUPjV2dBrZC2u8zh","cpf":"111.111.111-12","inquilino_id":"2","nome":"inquilino3","telefone":"(11) 11111-1111","edificio":"Helbor","apartamento_id":"2","valor":"200","vencimento":"2023-05-20"} 
+[2023-04-08 14:32:13] local.INFO: Valor de inquilino_id ["2"] 
+[2023-04-08 14:43:17] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:43:17] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":2,"nome":"inquilino3","cpf":"11111111112","email":"inquilino1@hotmail.com","telefone":"(11) 11111-1111","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:43:19] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:43:19] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":2,"nome":"inquilino3","cpf":"11111111112","email":"inquilino1@hotmail.com","telefone":"(11) 11111-1111","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:43:21] local.INFO: getApartamentos called with edificio: Helbor  
+[2023-04-08 14:46:24] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111111"} 
+[2023-04-08 14:46:24] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[]}} 
+[2023-04-08 14:46:26] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:46:26] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":2,"nome":"inquilino3","cpf":"11111111112","email":"inquilino1@hotmail.com","telefone":"(11) 11111-1111","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:46:29] local.INFO: Buscando inquilinos com CPF: {"cpf":"11111111112"} 
+[2023-04-08 14:46:29] local.INFO: Inquilinos encontrados: {"inquilinos":{"Illuminate\\Database\\Eloquent\\Collection":[{"id":2,"nome":"inquilino3","cpf":"11111111112","email":"inquilino1@hotmail.com","telefone":"(11) 11111-1111","senha":null,"endereco":null,"apartamento":null,"docs":null}]}} 
+[2023-04-08 14:46:31] local.INFO: getApartamentos called with edificio: Helbor  

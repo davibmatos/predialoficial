@@ -77,31 +77,43 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ asset('js/contratos.js') }}" defer></script>
+@endsection
+@section('scripts')
     <script>
         document.getElementById('cpf').addEventListener('change', async function() {
-    const cpf = this.value;
-    try {
-        const response = await fetch('/predial/public/inquilinos/por-cpf/' + cpf);
-        if (response.ok) {
-            const inquilino = await response.json();
-            if (inquilino) {
-                console.log(inquilino.nome);
-                document.getElementById('nome').value = inquilino.nome;
-                document.getElementById('telefone').value = inquilino.telefone;
-                document.getElementById('inquilino_id').value = inquilino.id; 
-            } else {
-                document.getElementById('nome').value = '';
-                document.getElementById('telefone').value = '';
-                document.getElementById('inquilino_id').value = '';
-                alert('Inquilino não encontrado');
+            const cpf = this.value;
+            console.log('CPF digitado:', cpf);
+            try {
+                const response = await fetch('/predial/public/inquilinos/por-cpf/' + cpf);
+                if (response.ok) {
+                    const inquilinos = await response
+                        .json(); // Certifique-se de que 'inquilinos' está sendo definido aqui
+                    console.log('Inquilinos:', inquilinos);
+
+                    if (inquilinos.length === 1) {
+                        const inquilino = inquilinos[0];
+                        document.getElementById('nome').value = inquilino.nome;
+                        document.getElementById('telefone').value = inquilino.telefone;
+                        document.getElementById('inquilino_id').value = inquilino.id;
+                    } else if (inquilinos.length > 1) {
+                        document.getElementById('nome').value = '';
+                        document.getElementById('telefone').value = '';
+                        document.getElementById('inquilino_id').value = '';
+                        alert('Há vários inquilinos com o mesmo CPF. Entre em contato com o administrador.');
+                    } else {
+                        document.getElementById('nome').value = '';
+                        document.getElementById('telefone').value = '';
+                        document.getElementById('inquilino_id').value = '';
+                        alert('Inquilino não encontrado');
+                    }
+                } else {
+                    throw new Error('Erro ao buscar inquilino');
+                }
+            } catch (error) {
+                console.error(error);
             }
-        } else {
-            throw new Error('Erro ao buscar inquilino');
-        }
-    } catch (error) {
-        console.error(error);
-    }
-});
+        });
 
         document.getElementById('edificio').addEventListener('change', async function() {
             const edificio = this.value;
@@ -135,14 +147,14 @@
 
         document.getElementById('apartamento').addEventListener('change', function() {
             const selectedOption = this.options[this.selectedIndex];
-            const valor = selectedOption.dataset.valor; 
+            const valor = selectedOption.dataset.valor;
             document.getElementById('valor').value = valor;
         });
         document.getElementById('debugButton').addEventListener('click', function() {
-    console.log('CPF:', document.getElementById('cpf').value);
-    console.log('Nome:', document.getElementById('nome').value);
-    console.log('Telefone:', document.getElementById('telefone').value);
-    console.log('Inquilino ID:', document.getElementById('inquilino_id').value);
-});
+            console.log('CPF:', document.getElementById('cpf').value);
+            console.log('Nome:', document.getElementById('nome').value);
+            console.log('Telefone:', document.getElementById('telefone').value);
+            console.log('Inquilino ID:', document.getElementById('inquilino_id').value);
+        });
     </script>
 @endsection
