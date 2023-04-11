@@ -14,7 +14,7 @@ if(!isset($id)){
 ?>
 
 
-<a href="{{route('inquilinos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Síndico</a>
+<a href="{{route('inquilinos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Inquilino</a>
 @if ($errors->has('error'))
     <div class="alert alert-danger mt-2">
         {{ $errors->first('error') }}

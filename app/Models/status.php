@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Apartamentos extends Model
+class Status extends Model
 {
     use HasFactory;
     public $timestamps = false;
 
-    public function imovel()
-    {
-        return $this->belongsTo(Imoveis::class, 'imovel_id', 'id');
-    }
+    protected $table = 'status';
 
     public function contratos()
     {
-        return $this->hasMany(Contratos::class, 'apartamento_id');
+        return $this->hasMany(Contrato::class);
     }
 }

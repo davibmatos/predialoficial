@@ -54,7 +54,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Valor</label>
-                    <input type="text" class="form-control" id="valor" name="valor">
+                    <input type="text" class="form-control" id="valor" name="valor" disabled>
                 </div>
             </div>
             <div class="col-md-2">
@@ -79,82 +79,7 @@
 @section('scripts')
     <script src="{{ asset('js/contratos.js') }}" defer></script>
 @endsection
+
 @section('scripts')
-    <script>
-        document.getElementById('cpf').addEventListener('change', async function() {
-            const cpf = this.value;
-            console.log('CPF digitado:', cpf);
-            try {
-                const response = await fetch('/predial/public/inquilinos/por-cpf/' + cpf);
-                if (response.ok) {
-                    const inquilinos = await response
-                        .json(); // Certifique-se de que 'inquilinos' está sendo definido aqui
-                    console.log('Inquilinos:', inquilinos);
-
-                    if (inquilinos.length === 1) {
-                        const inquilino = inquilinos[0];
-                        document.getElementById('nome').value = inquilino.nome;
-                        document.getElementById('telefone').value = inquilino.telefone;
-                        document.getElementById('inquilino_id').value = inquilino.id;
-                    } else if (inquilinos.length > 1) {
-                        document.getElementById('nome').value = '';
-                        document.getElementById('telefone').value = '';
-                        document.getElementById('inquilino_id').value = '';
-                        alert('Há vários inquilinos com o mesmo CPF. Entre em contato com o administrador.');
-                    } else {
-                        document.getElementById('nome').value = '';
-                        document.getElementById('telefone').value = '';
-                        document.getElementById('inquilino_id').value = '';
-                        alert('Inquilino não encontrado');
-                    }
-                } else {
-                    throw new Error('Erro ao buscar inquilino');
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        });
-
-        document.getElementById('edificio').addEventListener('change', async function() {
-            const edificio = this.value;
-            const apartamentosPorEdificioUrl =
-                `/predial/public/imoveis/${encodeURIComponent(edificio)}/apartamentos`;
-            console.log(apartamentosPorEdificioUrl);
-
-            try {
-                const response = await fetch(apartamentosPorEdificioUrl);
-                if (response.ok) {
-                    const apartamentos = await response.json();
-                    console.log('Apartamentos:', apartamentos);
-                    const apartamentoSelect = document.getElementById('apartamento');
-                    apartamentoSelect.innerHTML =
-                        '<option value="" selected disabled>Selecione um apartamento</option>';
-                    apartamentos.forEach(apartamento => {
-                        const option = document.createElement('option');
-                        option.value = apartamento.id;
-                        option.text = apartamento.numero;
-                        option.dataset.valor = apartamento.valor; // Adicione o atributo data-valor
-                        apartamentoSelect.add(option);
-                    });
-                    apartamentoSelect.disabled = false;
-                } else {
-                    throw new Error('Erro ao buscar apartamentos');
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        });
-
-        document.getElementById('apartamento').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const valor = selectedOption.dataset.valor;
-            document.getElementById('valor').value = valor;
-        });
-        document.getElementById('debugButton').addEventListener('click', function() {
-            console.log('CPF:', document.getElementById('cpf').value);
-            console.log('Nome:', document.getElementById('nome').value);
-            console.log('Telefone:', document.getElementById('telefone').value);
-            console.log('Inquilino ID:', document.getElementById('inquilino_id').value);
-        });
-    </script>
+    <script src="{{ asset('js/contratos.js') }}" defer></script>
 @endsection

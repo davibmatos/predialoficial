@@ -2,6 +2,7 @@
 @section('title', 'Contratos')
 @section('content')
 <?php 
+use Carbon\Carbon;
 @session_start();
 if(@$_SESSION['nivel_usuario'] != 'admin'){ 
   echo "<script language='javascript'> window.location='./' </script>";
@@ -35,6 +36,7 @@ if(!isset($id)){
           <th>Apartamento</th>
           <th>Valor</th>
           <th>Data do Vencimento</th>
+          <th>Status</th>
           <th>Ações</th>
         </tr>
       </thead>
@@ -42,27 +44,83 @@ if(!isset($id)){
       <tbody>
       @foreach($itens as $item)
          <tr>
-            <td>{{$item->nome}}</td>
-            <td>{{$item->cpf}}</td>
-            <td>{{$item->telefone}}</td>
-            <td>{{$item->edificio}}</td>
-            <td>{{$item->apartamento}}</td>
-            <td>{{$item->valor}}</td>
-            <td>{{$item->vencimento}}</td>
+          <td>{{$item->inquilino->nome}}</td>
+          <td>{{preg_replace("/^(\d{3})(\d{3})(\d{3})(\d{2})$/", "$1.$2.$3-$4", $item->inquilino->cpf)}}</td>
+          <td>{{$item->inquilino->telefone}}</td>
+          <td>{{$item->apartamento->imovel->edificio}}</td>
+          <td>{{$item->apartamento->numero}}</td>
+          <td>R${{number_format($item->apartamento->valor, 2, ',', '.')}}</td>
+          <td>{{Carbon::parse($item->vencimento)->format('d/m/Y')}}</td>
+          <td>{{@$item->status->status}}</td>
             <td>            
-            <a href="{{route('contratos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-            <a href="{{route('contratos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#statusModal-{{$item->id}}">Alterar Status</button>  
+            <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#vencimentoModal-{{$item->id}}">Alterar Vencimento</button>
+            <a href="{{route('contratos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>            
             </td>
         </tr>
+        <div class="modal fade" id="statusModal-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel-{{$item->id}}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="statusModalLabel-{{$item->id}}">Alterar Status do Contrato</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{route('contratos.updateStatus', $item)}}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="status-{{$item->id}}">Status</label>
+                    <select class="form-control" id="status-{{$item->id}}" name="status_id">
+                      @foreach($statuses as $status)
+                        <option value="{{$status->id}}" {{$item->status_id == $status->id ? 'selected' : ''}}>{{$status->status}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-warning">Alterar Status</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="vencimentoModal-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="vencimentoModalLabel-{{$item->id}}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="vencimentoModalLabel-{{$item->id}}">Alterar Data de Vencimento do Contrato</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{route('contratos.updateVencimento', $item)}}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="vencimento-{{$item->id}}">Data de Vencimento</label>
+                    <input type="date" class="form-control" id="vencimento-{{$item->id}}" name="vencimento" value="{{$item->vencimento}}">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-warning">Alterar Vencimento</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div
+        
         @endforeach 
       </tbody>
   </table>
 </div>
 </div>
-</div>
-
-
-   
+</div>   
 
 
 </div>
@@ -75,6 +133,33 @@ if(!isset($id)){
 
   });
 </script>
+
+<div class="modal fade" id="vencimentoModal-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="vencimentoModalLabel-{{$item->id}}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="vencimentoModalLabel-{{$item->id}}">Alterar Data de Vencimento do Contrato</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('contratos.updateVencimento', $item)}}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="vencimento-{{$item->id}}">Data de Vencimento</label>
+            <input type="date" class="form-control" id="vencimento-{{$item->id}}" name="vencimento" value="{{$item->vencimento}}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-warning">Alterar Vencimento</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

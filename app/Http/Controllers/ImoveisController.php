@@ -43,13 +43,13 @@ class ImoveisController extends Controller
     {
 
         $tabela = new imoveis();
-        $tabela->nome = $request->nome;
+        $tabela->edificio = $request->edificio;
         $tabela->matricula = $request->matricula;
         $tabela->endereco = $request->endereco;
         $tabela->bairro = $request->bairro;
         $tabela->numero = $request->numero;
 
-        $itens = imoveis::where('nome', '=', $request->nome)->first();
+        $itens = imoveis::where('edificio', '=', $request->edificio)->first();
 
         if ($itens !== null) {
             echo "<script language='javascript'> window.alert('O Imóvel cadastrado já existe') </script>";
@@ -69,7 +69,7 @@ class ImoveisController extends Controller
     public function editar(Request $request, imoveis $item)
     {
 
-        $item->nome = $request->nome;
+        $item->edificio = $request->edificio;
         $item->matricula = $request->matricula;
         $item->endereco = $request->endereco;
         $item->bairro = $request->bairro;

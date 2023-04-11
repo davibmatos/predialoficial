@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Models\usuario;
@@ -57,69 +58,45 @@ $usuario = usuario::find($id_usuario);
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider my-0">          
 
 
+             <!-- Cadastros Dropdown -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCadastros" aria-expanded="true" aria-controls="collapseCadastros">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Cadastros</span>
+                </a>
+                <div id="collapseCadastros" class="collapse" aria-labelledby="headingCadastros" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('imoveis.index') }}">Imóveis</a>
+                        <a class="collapse-item" href="{{ route('inquilinos.index') }}">Inquilinos</a>
+                        <a class="collapse-item" href="{{ route('apartamentos.index') }}">Apartamentos</a>
+                        <a class="collapse-item" href="{{ route('sindicos.index') }}">Síndicos</a>
+                    </div>
+                </div>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Contratos -->
+            @if ($usuario->nivel == 'admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contratos.index') }}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Contratos</span></a>
+                </li>
+            @endif
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('sindicos.index') }}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Síndicos</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('inquilinos.index') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Inquilinos</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('inquilinos.index') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Usuários</span></a>
-            </li>
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('imoveis.index') }}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Cadastro de Imóveis</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('apartamentos.index') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Cadastro de Apartamentos</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('contratos.index') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Contratos</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Relatórios</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Chat</span></a>
-            </li>
+            <!-- Painel Financeiro -->
+            @if ($usuario->nivel == 'admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('finance.index') }}">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Painel Financeiro</span></a>
+                </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

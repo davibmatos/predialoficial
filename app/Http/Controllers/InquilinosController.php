@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
+use App\Models\Imoveis;
 use App\Models\inquilino;
 use App\Models\sindico;
 use App\Models\usuario;
@@ -38,7 +39,8 @@ class InquilinosController extends Controller
 
     public function create()
     {
-        return view('painel-adm.inquilinos.create');
+        $edificios = Imoveis::select('edificio')->distinct()->get();
+        return view('painel-adm.inquilinos.create', ['edificios' => $edificios]);
     }
 
     public function insert(Request $request)
@@ -49,6 +51,8 @@ class InquilinosController extends Controller
         $tabela->email = $request->email;
         $tabela->cpf = preg_replace('/[^0-9]/', '', $request->cpf);
         $tabela->telefone = $request->telefone;
+        $tabela->rg = $request->rg;
+        $tabela->observacoes = $request->observacoes;
 
         $tabela2 = new usuario();
         $tabela2->nome = $request->nome;
@@ -83,6 +87,8 @@ class InquilinosController extends Controller
         $item->email = $request->email;
         $item->cpf = $request->cpf;
         $item->telefone = $request->telefone;
+        $item->rg = $request->rg;
+        $item->observacoes = $request->observacoes;
 
 
         $oldcpf = $request->oldcpf;

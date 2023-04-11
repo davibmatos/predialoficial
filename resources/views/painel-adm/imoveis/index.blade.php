@@ -40,7 +40,7 @@ if(!isset($id)){
       <tbody>
       @foreach($itens as $item)
          <tr>
-            <td>{{$item->nome}}</td>
+            <td>{{$item->edificio}}</td>
             <td>{{$item->matricula}}</td>
             <td>{{$item->endereco}}</td>
             <td>{{$item->bairro}}</td>
