@@ -1,12 +1,6 @@
 @extends('templates.painel-adm')
-@section('title', 'Painel Administrativo')
+@section('title', 'Painel Financeiro')
 @section('content')
-<?php
-@session_start();
-if (@$_SESSION['nivel_usuario'] != 'admin') {
-    echo "<script language='javascript'> window.location='./' </script>";
-}
-?>
 
 <style>
   .card {
@@ -16,14 +10,16 @@ if (@$_SESSION['nivel_usuario'] != 'admin') {
     margin-bottom: 20px;
   }
 
-  .card-body {
-    padding: 20px;
+  .card-header {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-bottom: 1px solid #d1d1d1;
+    font-weight: bold;
+    color: #333;
   }
 
-  .card-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  .card-body {
+    padding: 20px;
   }
 
   .card-text {
@@ -36,25 +32,25 @@ if (@$_SESSION['nivel_usuario'] != 'admin') {
 <div class="row">
   <div class="col-md-4">
     <div class="card">
+      <div class="card-header">Valores Recebidos</div>
       <div class="card-body">
-        <h5 class="card-title">Total de Imóveis</h5>
-        <p class="card-text">{{ $totalImoveis }}</p>
+        <p class="card-text">R$ {{ number_format($valoresRecebidos, 2, ',', '.') }}</p>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="card">
+      <div class="card-header">Valores a Receber</div>
       <div class="card-body">
-        <h5 class="card-title">Imóveis Disponíveis</h5>
-        <p class="card-text">{{ $imoveisDisponiveis }}</p>
+        <p class="card-text">R$ {{ number_format($valoresAReceber, 2, ',', '.') }}</p>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="card">
+      <div class="card-header">Valores Pendentes</div>
       <div class="card-body">
-        <h5 class="card-title">Imóveis Locados</h5>
-        <p class="card-text">{{ $imoveisLocados }}</p>
+        <p class="card-text">R$ {{ number_format($valoresPendentes, 2, ',', '.') }}</p>
       </div>
     </div>
   </div>

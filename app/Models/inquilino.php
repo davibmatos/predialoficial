@@ -22,4 +22,9 @@ class Inquilino extends Model
         'apartamentos',
         'docs'
     ];
+
+    public function contratos()
+    {
+        return $this->hasMany(Contrato::class);
+    }
 }

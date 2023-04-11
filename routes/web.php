@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApartamentosController;
 use App\Http\Controllers\CadSindicosController;
 use App\Http\Controllers\ContratosController;
+use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImoveisController;
 use App\Http\Controllers\InquilinosController;
@@ -77,7 +78,11 @@ Route::delete('contratos/{item}', [ContratosController::class, 'delete'])->name(
 Route::get('inquilinos/por-cpf/{cpf?}', [InquilinosController::class, 'buscarPorCpf'])->name('inquilinos.por_cpf');
 Route::get('/imoveis/edificios', [ImoveisController::class, 'getEdificios'])->name('imoveis.edificios');
 Route::get('/imoveis/{edificio}/apartamentos', [ImoveisController::class, 'getApartamentos'])->name('imoveis.apartamentos');
+Route::put('/contratos/{contrato}/updateStatus', [ContratosController::class, 'updateStatus'])->name('contratos.updateStatus');
+Route::put('contratos/{contrato}/update-vencimento', [ContratosController::class, 'updateVencimento'])->name('contratos.updateVencimento');
 
+//PAINEL FINANCEIRO
+Route::get('/financeiro', [FinanceController::class, 'index'])->name('finance.index');
 
 
 

@@ -340,8 +340,8 @@ class ComposerStaticInit743afc50f2364a7787599e5d75fa5fd9
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -505,10 +505,19 @@ class ComposerStaticInit743afc50f2364a7787599e5d75fa5fd9
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\UpdateContratosStatus' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateContratosStatus.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
+        'App\\Http\\Controllers\\ApartamentosController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApartamentosController.php',
+        'App\\Http\\Controllers\\CadSindicosController' => __DIR__ . '/../..' . '/app/Http/Controllers/CadSindicosController.php',
+        'App\\Http\\Controllers\\ContratosController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContratosController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\FinanceController' => __DIR__ . '/../..' . '/app/Http/Controllers/FinanceController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ImoveisController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImoveisController.php',
+        'App\\Http\\Controllers\\InquilinosController' => __DIR__ . '/../..' . '/app/Http/Controllers/InquilinosController.php',
+        'App\\Http\\Controllers\\StatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/StatusController.php',
         'App\\Http\\Controllers\\UsuariosController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsuariosController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -521,6 +530,8 @@ class ComposerStaticInit743afc50f2364a7787599e5d75fa5fd9
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\inquilinos' => __DIR__ . '/../..' . '/app/Models/inquilinos.php',
+        'App\\Models\\sindico' => __DIR__ . '/../..' . '/app/Models/sindico.php',
         'App\\Models\\usuario' => __DIR__ . '/../..' . '/app/Models/usuario.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
