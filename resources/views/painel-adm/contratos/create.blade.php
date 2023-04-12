@@ -68,7 +68,7 @@
         <p align="right">
             <button type="submit" class="btn btn-primary">Salvar</button>
         </p>
-        <button type="button" id="debugButton">Debug</button>
+    
     </form>
     <script>
         window.inquilinosPorCpfUrl = "{{ url('/inquilinos/por-cpf') }}";

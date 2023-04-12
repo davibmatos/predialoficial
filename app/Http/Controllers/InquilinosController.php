@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contratos;
 use App\Models\Imoveis;
 use App\Models\inquilino;
 use App\Models\sindico;
+use App\Models\Status;
 use App\Models\usuario;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ class InquilinosController extends Controller
             return new JsonResponse(null, 400);
         }
 
-        $cpf = preg_replace('/[^0-9]/', '', $cpf); 
+        $cpf = preg_replace('/[^0-9]/', '', $cpf);
 
         Log::info('Buscando inquilinos com CPF:', ['cpf' => $cpf]);
 
@@ -40,7 +42,9 @@ class InquilinosController extends Controller
     public function create()
     {
         $edificios = Imoveis::select('edificio')->distinct()->get();
-        return view('painel-adm.inquilinos.create', ['edificios' => $edificios]);
+        $statuses = Status::all();
+        $imoveis = Imoveis::all(); // Adicione esta linha
+        return view('painel-adm.inquilinos.create', ['edificios' => $edificios, 'statuses' => $statuses, 'imoveis' => $imoveis]); // Adicione 'imoveis' => $imoveis
     }
 
     public function insert(Request $request)
@@ -70,7 +74,19 @@ class InquilinosController extends Controller
         }
 
         $tabela->save();
+        Log::info('Inquilino criado com ID:', ['id' => $tabela->id]);
         $tabela2->save();
+
+        $statusAVencer = Status::where('status', 'a vencer')->first();
+
+        $contrato = new Contratos();
+        $contrato->inquilino_id = $tabela->id;
+        Log::info('Contrato criado com inquilino_id:', ['inquilino_id' => $contrato->inquilino_id]);
+        $contrato->apartamento_id = $request->apartamento_id;
+        $contrato->vencimento = $request->vencimento;
+        $contrato->status_id = $statusAVencer->id;
+        $contrato->save();
+
         return redirect()->route('inquilinos.index');
     }
 

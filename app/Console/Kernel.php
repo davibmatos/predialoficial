@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         
-        $schedule->command('update:contratos-status')->daily()->dailyAt('16:00');;
+        $schedule->command('update:contratos-status')->daily()->dailyAt('16:00');
+        $schedule->command('email:sendExpiredContracts')->dailyAt('23:59');
     }
 
     /**

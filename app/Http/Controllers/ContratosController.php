@@ -50,9 +50,10 @@ class ContratosController extends Controller
         $tabela->inquilino_id = $request->inquilino_id;
         $tabela->apartamento_id = $request->apartamento_id;
         $tabela->vencimento = $request->vencimento;
+        $tabela->status_id = 1; 
 
         $tabela->save();
-        return redirect()->route('painel-adm.contratos.create');
+        return redirect()->route('contratos.index');
     }
 
     public function edit(contratos $item)

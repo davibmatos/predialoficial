@@ -36,12 +36,11 @@ class ImoveisController extends Controller
         Log::info('getApartamentos called with edificio: ' . $edificio);
         $imovel = Imoveis::where('edificio', $edificio)->first();
         $apartamentos = Apartamentos::where('imovel_id', $imovel->id)->get();
-        return response()->json($apartamentos->makeVisible('valor')); 
+        return response()->json($apartamentos->makeVisible('valor'));
     }
 
     public function insert(Request $request)
     {
-
         $tabela = new imoveis();
         $tabela->edificio = $request->edificio;
         $tabela->matricula = $request->matricula;
@@ -57,6 +56,26 @@ class ImoveisController extends Controller
         }
 
         $tabela->save();
+
+        // Salvar apartamentos
+        foreach ($request->apartamentos as $apartamentoData) {
+            $apartamentoExistente = Apartamentos::where('imovel_id', $tabela->id)
+                ->where('numero', $apartamentoData['numero'])
+                ->first();
+
+            if ($apartamentoExistente === null) {
+                $apartamento = new Apartamentos;
+                $apartamento->numero = $apartamentoData['numero'];
+                $valor = str_replace(['R$', '.', ','], ['', '', '.'], $apartamentoData['valor']);
+                $apartamento->valor = floatval($valor);
+                $apartamento->imovel_id = $tabela->id;
+                $apartamento->save();
+            } else {
+                echo "<script language='javascript'> window.alert('O apartamento {$apartamentoData['numero']} já está cadastrado') </script>";
+                return view('painel-adm.imoveis.create');
+            }
+        }
+
         return redirect()->route('imoveis.index');
     }
 

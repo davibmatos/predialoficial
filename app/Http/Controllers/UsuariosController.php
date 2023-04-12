@@ -9,7 +9,6 @@ class UsuariosController extends Controller
 {
     public function login(Request $request)
     {
-
         $email = $request->email;
         $senha = $request->senha;
 
@@ -23,7 +22,7 @@ class UsuariosController extends Controller
             $_SESSION['cpf_usuario'] = $usuarios->cpf;
 
             if ($_SESSION['nivel_usuario'] == 'admin') {
-                return view('painel-adm.index');
+                return redirect()->route('admin.index');
             }
             if ($_SESSION['nivel_usuario'] == 'sindico') {
                 return view('painel-sindico.index');
@@ -36,7 +35,6 @@ class UsuariosController extends Controller
             return view('index');
         }
     }
-
     public function logout()
     {
         @session_start();

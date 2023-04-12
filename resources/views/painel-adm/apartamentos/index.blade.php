@@ -40,7 +40,7 @@ if(!isset($id)){
          <tr>
           <td>{{ $item->imovel->edificio ? $item->imovel->edificio : 'N/A' }}</td>
             <td>{{$item->numero}}</td>
-            <td>{{$item->valor}}</td>
+            <td>R$ {{number_format($item->valor, 2, ',', '.')}}</td>
             <td>            
             <a href="{{route('apartamentos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
             <a href="{{route('apartamentos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>

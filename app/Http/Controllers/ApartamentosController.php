@@ -30,7 +30,7 @@ class ApartamentosController extends Controller
     {
         $tabela = new apartamentos();
         $tabela->numero = $request->numero;
-        $tabela->valor = str_replace(['R$ ', ','], ['', '.'], $request->valor);
+        $tabela->valor = (float) str_replace(',', '.', preg_replace('/[^\d,]/', '', $request->valor));
         $tabela->imovel_id = $request->imovel_id;
 
         $itens = DB::table('apartamentos')
@@ -58,7 +58,7 @@ class ApartamentosController extends Controller
     {
 
         $item->numero = $request->numero;
-        $item->valor = $request->valor;
+        $item->valor = (float) str_replace(',', '.', preg_replace('/[^\d,]/', '', $request->valor));
 
 
         $oldnumero = $request->oldnumero;
