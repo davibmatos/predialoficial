@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="numero">Número do Apto</label>
-                        <input type="text" class="form-control" id="numero" name="apartamentos[0][numero]" required>
+                        <input type="text" class="form-control" id="numero" name="apartamentos[0][numero]">
                     </div>
                 </div>
                 <div class="col-md-2">

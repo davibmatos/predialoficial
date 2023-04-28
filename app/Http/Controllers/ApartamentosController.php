@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\DB;
 class ApartamentosController extends Controller
 {
     public function index()
-{
-    $tabela = Apartamentos::with('imovel')->orderBy('id', 'desc')->paginate();
-    return view('painel-adm.apartamentos.index', ['itens' => $tabela]);
-}
+    {
+        $tabela = Apartamentos::with('imovel')->orderBy('id', 'desc')->paginate();
+        return view('painel-adm.apartamentos.index', ['itens' => $tabela]);
+    }
 
     public function create()
     {
@@ -33,15 +33,13 @@ class ApartamentosController extends Controller
         $tabela->valor = (float) str_replace(',', '.', preg_replace('/[^\d,]/', '', $request->valor));
         $tabela->imovel_id = $request->imovel_id;
 
-        $itens = DB::table('apartamentos')
-            ->join('imoveis', 'apartamentos.imovel_id', '=', 'imoveis.matricula')
-            ->where('apartamentos.numero', '=', $request->numero)
-            ->where('imoveis.matricula', '=', $request->matricula)
+        // Verificar se o número do apartamento já existe relacionado ao mesmo imóvel
+        $apartamentoExistente = apartamentos::where('numero', $request->numero)
+            ->where('imovel_id', $request->imovel_id)
             ->first();
 
-        if ($itens !== null) {
-            echo "<script language='javascript'> window.alert('O apartamento cadastrado já existe') </script>";
-            return view('painel-adm.apartamentos.create');
+        if ($apartamentoExistente !== null) {
+            return back()->with('error', 'O apartamento cadastrado já existe.');
         }
 
         $tabela->save();
@@ -50,7 +48,8 @@ class ApartamentosController extends Controller
 
     public function edit(apartamentos $item)
     {
-        return view('painel-adm.apartamentos.edit', ['item' => $item]);
+        $imoveis = imoveis::whereNotNull('matricula')->where('matricula', '<>', '')->get();
+        return view('painel-adm.apartamentos.edit', ['item' => $item, 'imoveis' => $imoveis]);
     }
 
 
@@ -62,14 +61,7 @@ class ApartamentosController extends Controller
 
 
         $oldnumero = $request->oldnumero;
-
-        if ($oldnumero != $request->numero) {
-            $itens = apartamentos::where('numero', '=', $request->numero)->count();
-            if ($itens > 0) {
-                echo "<script language='javascript'> window.alert('O apartamento já está Cadastrado!') </script>";
-                return view('painel-adm.apartamentos.edit', ['item' => $item]);
-            }
-        }
+        
 
         $item->save();
         return redirect()->route('apartamentos.index');

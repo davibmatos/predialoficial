@@ -58,26 +58,32 @@ class ImoveisController extends Controller
         $tabela->save();
 
         // Salvar apartamentos
-        foreach ($request->apartamentos as $apartamentoData) {
-            $apartamentoExistente = Apartamentos::where('imovel_id', $tabela->id)
-                ->where('numero', $apartamentoData['numero'])
-                ->first();
+        if (isset($request->apartamentos) && count($request->apartamentos) > 0) {
+            foreach ($request->apartamentos as $apartamentoData) {
+                // Verifique se o número do apartamento não está vazio
+                if (!empty($apartamentoData['numero'])) {
+                    $apartamentoExistente = Apartamentos::where('imovel_id', $tabela->id)
+                        ->where('numero', $apartamentoData['numero'])
+                        ->first();
 
-            if ($apartamentoExistente === null) {
-                $apartamento = new Apartamentos;
-                $apartamento->numero = $apartamentoData['numero'];
-                $valor = str_replace(['R$', '.', ','], ['', '', '.'], $apartamentoData['valor']);
-                $apartamento->valor = floatval($valor);
-                $apartamento->imovel_id = $tabela->id;
-                $apartamento->save();
-            } else {
-                echo "<script language='javascript'> window.alert('O apartamento {$apartamentoData['numero']} já está cadastrado') </script>";
-                return view('painel-adm.imoveis.create');
+                    if ($apartamentoExistente === null) {
+                        $apartamento = new Apartamentos;
+                        $apartamento->numero = $apartamentoData['numero'];
+                        $valor = str_replace(['R$', '.', ','], ['', '', '.'], $apartamentoData['valor']);
+                        $apartamento->valor = floatval($valor);
+                        $apartamento->imovel_id = $tabela->id;
+                        $apartamento->save();
+                    } else {
+                        echo "<script language='javascript'> window.alert('O apartamento {$apartamentoData['numero']} já está cadastrado') </script>";
+                        return view('painel-adm.imoveis.create');
+                    }
+                }
             }
         }
 
         return redirect()->route('imoveis.index');
     }
+
 
     public function edit(imoveis $item)
     {
@@ -95,11 +101,11 @@ class ImoveisController extends Controller
         $item->numero = $request->numero;
 
 
-        $oldnome = $request->oldnome;
+        $oldedificio = $request->oldedificio;
         $oldmatricula = $request->oldmatricula;
 
-        if ($oldnome != $request->nome) {
-            $itens = imoveis::where('nome', '=', $request->nome)->count();
+        if ($oldedificio != $request->edificio) {
+            $itens = imoveis::where('edificio', '=', $request->edificio)->count();
             if ($itens > 0) {
                 echo "<script language='javascript'> window.alert('Nome já Cadastrado!') </script>";
                 return view('painel-adm.imoveis.edit', ['item' => $item]);
@@ -107,7 +113,7 @@ class ImoveisController extends Controller
         }
 
         if ($oldmatricula != $request->matricula) {
-            $itens = imoveis::where('nome', '=', $request->matricula)->count();
+            $itens = imoveis::where('edificio', '=', $request->matricula)->count();
             if ($itens > 0) {
                 echo "<script language='javascript'> window.alert('Essa matrícula já existe!') </script>";
                 return view('painel-adm.imoveis.edit', ['item' => $item]);
@@ -120,8 +126,16 @@ class ImoveisController extends Controller
 
     public function delete(imoveis $item)
     {
-        $item->delete();
-        return redirect()->route('imoveis.index');
+        // Verifica se há apartamentos associados a este imóvel
+        $apartamentos_associados = Apartamentos::where('imovel_id', $item->id)->count();
+
+        if ($apartamentos_associados > 0) {
+            // Retorne uma mensagem de erro amigável ao usuário
+            return redirect()->route('imoveis.index')->with(['error' => 'Não é possível excluir o imóvel, pois há apartamentos associados a ele.']);
+        } else {
+            $item->delete();
+            return redirect()->route('imoveis.index');
+        }
     }
 
     public function modal($id)

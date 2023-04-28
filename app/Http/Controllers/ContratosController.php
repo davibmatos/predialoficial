@@ -31,11 +31,12 @@ class ContratosController extends Controller
 
     public function insert(Request $request)
     {
-        Log::info('Inserindo contrato', $request->all());
         $request->validate([
             'inquilino_id' => 'required',
             'apartamento_id' => 'required',
             'vencimento' => 'required',
+            'data_inicio' => 'required|date',
+            'data_fim' => 'required|date|after_or_equal:data_inicio',
         ]);
 
         Log::info('Inserindo contrato', $request->all());
@@ -50,7 +51,11 @@ class ContratosController extends Controller
         $tabela->inquilino_id = $request->inquilino_id;
         $tabela->apartamento_id = $request->apartamento_id;
         $tabela->vencimento = $request->vencimento;
-        $tabela->status_id = 1; 
+        $tabela->data_inicio = $request->data_inicio;
+        $tabela->data_fim = $request->data_fim;
+        $tabela->status_id = 1;
+
+        $tabela->save();
 
         $tabela->save();
         return redirect()->route('contratos.index');
@@ -58,7 +63,7 @@ class ContratosController extends Controller
 
     public function edit(contratos $item)
     {
-        return view('painel-adm.inquilinos.edit', ['item' => $item]);
+        return view('painel-adm.contratos.edit', ['item' => $item]);
     }
 
     public function updateStatus(Request $request, Contratos $contrato)
@@ -68,34 +73,27 @@ class ContratosController extends Controller
     }
 
     public function updateVencimento(Request $request, Contratos $contrato)
-{
-    $contrato->update(['vencimento' => $request->vencimento]);
-    return redirect()->route('contratos.index')->with('success', 'Data de vencimento atualizada com sucesso!');
-}
+    {
+        $contrato->update(['vencimento' => $request->vencimento]);
+        return redirect()->route('contratos.index')->with('success', 'Data de vencimento atualizada com sucesso!');
+    }
 
 
     public function editar(Request $request, contratos $item)
     {
+        $request->validate([
+            'vencimento' => 'required',
+            'data_inicio' => 'required|date',
+            'data_fim' => 'required|date|after_or_equal:data_inicio',
+        ]);
 
-        $item->nome = $request->nome;
-        $item->email = $request->email;
-        $item->cpf = $request->cpf;
-        $item->telefone = $request->telefone;
-
-
-        $oldcpf = $request->oldcpf;
-        $oldemail = $request->oldemail;
-
-        if ($oldcpf != $request->cpf) {
-            $itens = contratos::where('cpf', '=', $request->cpf)->count();
-            if ($itens > 0) {
-                echo "<script language='javascript'> window.alert('CPF já Cadastrado!') </script>";
-                return view('painel-adm.contratos.edit', ['item' => $item]);
-            }
-        }
+        $item->vencimento = $request->vencimento;
+        $item->data_inicio = $request->data_inicio;
+        $item->data_fim = $request->data_fim;
 
         $item->save();
-        return redirect()->route('contratos.index');
+
+        return redirect()->route('contratos.index')->with('success', 'Contrato atualizado com sucesso!');
     }
 
     public function delete(contratos $item)

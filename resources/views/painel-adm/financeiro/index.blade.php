@@ -29,31 +29,62 @@
   }
 </style>
 
-<div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">Valores Recebidos</div>
-      <div class="card-body">
-        <p class="card-text">R$ {{ number_format($valoresRecebidos, 2, ',', '.') }}</p>
+@php
+  $mesAtual = now()->month;
+  $mesAnterior = now()->subMonth()->month;
+  $mesAntesDoAnterior = now()->subMonths(2)->month;
+
+  $nomesDosMeses = [
+    1 => 'Janeiro',
+    2 => 'Fevereiro',
+    3 => 'Março',
+    4 => 'Abril',
+    5 => 'Maio',
+    6 => 'Junho',
+    7 => 'Julho',
+    8 => 'Agosto',
+    9 => 'Setembro',
+    10 => 'Outubro',
+    11 => 'Novembro',
+    12 => 'Dezembro'
+  ];
+
+  $meses = [
+    $nomesDosMeses[$mesAtual] => $dadosMesAtual,
+    $nomesDosMeses[$mesAnterior] => $dadosMesAnterior,
+    $nomesDosMeses[$mesAntesDoAnterior] => $dadosMesAntesDoAnterior,
+  ];
+@endphp
+
+
+@foreach ($meses as $mes => $dados)
+  <h3>{{ $mes }}</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">Valores Recebidos</div>
+        <div class="card-body">
+          <p class="card-text">R$ {{ number_format($dados['valoresRecebidos'], 2, ',', '.') }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">Valores a Receber</div>
+        <div class="card-body">
+          <p class="card-text">R$ {{ number_format($dados['valoresAReceber'], 2, ',', '.') }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">Valores Devidos e não pagos</div>
+        <div class="card-body">
+          <p class="card-text">R$ {{ number_format($dados['valoresPendentes'], 2, ',', '.') }}</p>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">Valores a Receber</div>
-      <div class="card-body">
-        <p class="card-text">R$ {{ number_format($valoresAReceber, 2, ',', '.') }}</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">Valores Pendentes</div>
-      <div class="card-body">
-        <p class="card-text">R$ {{ number_format($valoresPendentes, 2, ',', '.') }}</p>
-      </div>
-    </div>
-  </div>
-</div>
+@endforeach
 
 @endsection

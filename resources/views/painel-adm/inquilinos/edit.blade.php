@@ -44,6 +44,14 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
+                    <label for="telefone2">Telefone Opcional</label>
+                    <input value="{{$item->telefone2}}" type="text" class="form-control" id="telefone2" name="telefone2">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
                     <label for="observacoes">Observações</label>
                     <textarea class="form-control" id="observacoes" name="observacoes" rows="3">{{$item->observacoes}}</textarea>
                 </div>

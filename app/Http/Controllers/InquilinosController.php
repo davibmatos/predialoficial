@@ -55,16 +55,10 @@ class InquilinosController extends Controller
         $tabela->email = $request->email;
         $tabela->cpf = preg_replace('/[^0-9]/', '', $request->cpf);
         $tabela->telefone = $request->telefone;
+        $tabela->telefone2 = $request->telefone2;
         $tabela->rg = $request->rg;
         $tabela->observacoes = $request->observacoes;
 
-        $tabela2 = new usuario();
-        $tabela2->nome = $request->nome;
-        $tabela2->email = $request->email;
-        $tabela2->cpf = preg_replace('/[^0-9]/', '', $request->cpf);
-        $tabela2->telefone = $request->telefone;
-        $tabela2->senha = $request->cpf;
-        $tabela2->nivel = 'inquilino';
 
         $itens = inquilino::where('cpf', '=', $request->cpf)->orwhere('email', '=', $request->email)->first();
 
@@ -74,8 +68,7 @@ class InquilinosController extends Controller
         }
 
         $tabela->save();
-        Log::info('Inquilino criado com ID:', ['id' => $tabela->id]);
-        $tabela2->save();
+        
 
         $statusAVencer = Status::where('status', 'a vencer')->first();
 
@@ -103,6 +96,7 @@ class InquilinosController extends Controller
         $item->email = $request->email;
         $item->cpf = $request->cpf;
         $item->telefone = $request->telefone;
+        $item->telefone2 = $request->telefone2;
         $item->rg = $request->rg;
         $item->observacoes = $request->observacoes;
 

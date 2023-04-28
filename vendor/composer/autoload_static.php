@@ -505,6 +505,7 @@ class ComposerStaticInit743afc50f2364a7787599e5d75fa5fd9
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\SendExpiredContractsEmail' => __DIR__ . '/../..' . '/app/Console/Commands/SendExpiredContractsEmail.php',
         'App\\Console\\Commands\\UpdateContratosStatus' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateContratosStatus.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -521,6 +522,7 @@ class ComposerStaticInit743afc50f2364a7787599e5d75fa5fd9
         'App\\Http\\Controllers\\UsuariosController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsuariosController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckUserLevel' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckUserLevel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',

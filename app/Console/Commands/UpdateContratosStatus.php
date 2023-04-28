@@ -10,7 +10,7 @@ class UpdateContratosStatus extends Command
 {
     protected $signature = 'update:contratos-status';
 
-    protected $description = 'Update contratos status based on their vencimento date';
+    protected $description = 'Update contratos status baseado na data';
 
     public function __construct()
     {
@@ -21,20 +21,21 @@ class UpdateContratosStatus extends Command
     {
         $today = now();
 
-        // Get all 'a vencer' and 'pago' contratos
-        $contratos = Contratos::whereIn('status_id', [1, 3])->get();
+        // Get all 'a vencer' contratos
+        $contratos = Contratos::where('status_id', 1)->get();
 
         foreach ($contratos as $contrato) {
             $vencimento = Carbon::parse($contrato->vencimento);
 
-            // If the vencimento date is in the past, set status to 'vencido'
-            if ($vencimento->lt($today)) {
+            // If the vencimento day is in the past and status is 'a vencer', set status to 'vencido'
+            if ($vencimento->isPast() && $vencimento->day < $today->day) {
                 $contrato->update(['status_id' => 4]);
             }
-            // If the vencimento date is in the current month, set status to 'a vencer'
-            elseif ($vencimento->month == $today->month) {
-                $contrato->update(['status_id' => 1]);
-            }
+        }
+
+        // At the first day of each month, set all contratos status to 'a vencer'
+        if ($today->day == 1) {
+            Contratos::query()->update(['status_id' => 1]);
         }
     }
 }

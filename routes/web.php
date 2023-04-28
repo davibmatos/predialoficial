@@ -72,8 +72,8 @@ Route::get('contratos', [ContratosController::class, 'index'])->name('contratos.
 Route::post('contratos', [ContratosController::class, 'insert'])->name('contratos.insert');
 Route::get('contratos/inserir', [ContratosController::class, 'create'])->name('contratos.inserir');
 Route::put('contratos/{item}', [ContratosController::class, 'editar'])->name('contratos.editar');
-Route::get('contratos/{item}/edit}', [ContratosController::class, 'edit'])->name('contratos.edit');
-Route::get('contratos/{item}/delete}', [ContratosController::class, 'modal'])->name('contratos.modal');
+Route::get('contratos/{item}/edit', [ContratosController::class, 'edit'])->name('contratos.edit');
+Route::get('contratos/{item}/delete', [ContratosController::class, 'modal'])->name('contratos.modal');
 Route::delete('contratos/{item}', [ContratosController::class, 'delete'])->name('contratos.delete');
 Route::get('inquilinos/por-cpf/{cpf?}', [InquilinosController::class, 'buscarPorCpf'])->name('inquilinos.por_cpf');
 Route::get('/imoveis/edificios', [ImoveisController::class, 'getEdificios'])->name('imoveis.edificios');

@@ -40,9 +40,7 @@
                     </select>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="apartamento">Apartamento</label>
                     <select class="form-control" id="apartamento" name="apartamento_id" disabled>
@@ -50,7 +48,8 @@
                     </select>
                 </div>
             </div>
-
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Valor</label>
@@ -59,13 +58,25 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Data do Vencimento</label>
-                    <input type="date" class="form-control" id="vencimento" name="vencimento">
+                    <label for="vencimento">Dia do Vencimento</label>
+                    <input type="number" class="form-control" id="vencimento" name="vencimento" min="1" max="31" required>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="data_inicio">Data do Início do Contrato</label>
+                    <input type="date" class="form-control" id="data_inicio" name="data_inicio" required>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="data_fim">Data do Fim do Contrato</label>
+                    <input type="date" class="form-control" id="data_fim" name="data_fim" required>
                 </div>
             </div>
         </div>
 
-        <p align="right">
+        <p align="left">
             <button type="submit" class="btn btn-primary">Salvar</button>
         </p>
     

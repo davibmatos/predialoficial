@@ -2,6 +2,11 @@
 @section('title', 'Inserir Inquilinos')
 @section('content')
 <h6 class="mb-4"><i>CADASTRO DE APARTAMENTOS</i></h6><hr>
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 <form method="POST" action="{{route('apartamentos.insert')}}">
     @csrf
 

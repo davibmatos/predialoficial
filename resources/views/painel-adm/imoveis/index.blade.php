@@ -15,9 +15,9 @@ if(!isset($id)){
 
 
 <a href="{{route('imoveis.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Imóvel</a>
-@if ($errors->has('error'))
+@if (session('error'))
     <div class="alert alert-danger mt-2">
-        {{ $errors->first('error') }}
+      {{ session('error') }}
     </div>
 @endif
 <!-- DataTales Example -->

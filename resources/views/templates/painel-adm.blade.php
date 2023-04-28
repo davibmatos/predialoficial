@@ -72,7 +72,7 @@ $usuario = usuario::find($id_usuario);
                         <a class="collapse-item" href="{{ route('imoveis.index') }}">Imóveis</a>
                         <a class="collapse-item" href="{{ route('inquilinos.index') }}">Inquilinos</a>
                         <a class="collapse-item" href="{{ route('apartamentos.index') }}">Apartamentos</a>
-                        <a class="collapse-item" href="{{ route('sindicos.index') }}">Síndicos</a>
+                        {{-- <a class="collapse-item" href="{{ route('sindicos.index') }}">Síndicos</a> --}}
                     </div>
                 </div>
             </li>

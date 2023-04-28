@@ -1,49 +1,44 @@
 @extends('templates.painel-adm')
-@section('title', 'Editar Inquilinos')
+@section('title', 'Editar Apartamentos')
 @section('content')
-<h6 class="mb-4"><i>EDIÇÃO DE INQUILINOS</i></h6><hr>
-<form method="POST" action="{{route('imoveis.editar', $item)}}">
-    @csrf
-    @method('put')
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input value="{{$item->nome}}" type="text" class="form-control" id="nome" name="nome" required>
+    <h6 class="mb-4"><i>EDIÇÃO DE APARTAMENTOS</i></h6>
+    <hr>
+    <form method="POST" action="{{ route('apartamentos.editar', $item) }}">
+        @csrf
+        @method('put')
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="nome">Número</label>
+                    <input value="{{ $item->numero }}" type="text" class="form-control" id="numero" name="numero"
+                        required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="imovel_id">Nome do imóvel</label>
+                    <select class="form-control" id="imovel_id" name="imovel_id" required>
+                        <option value="">Selecione um imóvel</option>
+                        @foreach ($imoveis as $imovel)
+                            <option value="{{ $imovel->id }}" {{ $item->imovel_id == $imovel->id ? 'selected' : '' }}>{{ $imovel->edificio }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="valor">Valor R$</label>
+                    <input value="{{ $item->valor }}" type="text" class="form-control" id="valor" name="valor"
+                        required>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="matricula">Matrícula</label>
-                <input value="{{$item->matricula}}" type="text" class="form-control" id="matricula" name="matricula">
+
+        <input value="{{ $item->nome }}" type="hidden" name="oldnome">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="endereco">Endereço</label>
-                <input value="{{$item->endereco}}" type="text" class="form-control" id="endereco" name="endereco">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="numero">Número</label>
-                <input value="{{$item->numero}}" type="text" class="form-control" id="numero" name="numero">
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="bairro">Bairro</label>
-                <input value="{{$item->bairro}}" type="text" class="form-control" id="bairro" name="bairro">
-            </div>
-        </div>
-    </div>
-    <input value="{{$item->nome}}" type="hidden" name="oldnome">
-    <div class="row">
-        <div class="col-md-12">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-        </div>
-    </div>
-</form>
+    </form>
 @endsection

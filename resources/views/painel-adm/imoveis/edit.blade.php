@@ -8,8 +8,8 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="nome">Nome</label>
-                <input value="{{$item->nome}}" type="text" class="form-control" id="nome" name="nome" required>
+                <label for="edificio">Nome</label>
+                <input value="{{$item->edificio}}" type="text" class="form-control" id="edificio" name="edificio" required>
             </div>
         </div>
         <div class="col-md-4">
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <input value="{{$item->nome}}" type="hidden" name="oldnome">
+    <input value="{{$item->edificio}}" type="hidden" name="oldedificio">
     <div class="row">
         <div class="col-md-12">
             <button type="submit" class="btn btn-primary">Salvar</button>
