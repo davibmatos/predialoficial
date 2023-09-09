@@ -59,7 +59,8 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="vencimento">Dia do Vencimento</label>
-                    <input type="number" class="form-control" id="vencimento" name="vencimento" min="1" max="31" required>
+                    <input type="number" class="form-control" id="vencimento" name="vencimento" min="1"
+                        max="31" required>
                 </div>
             </div>
             <div class="col-md-2">
@@ -79,7 +80,7 @@
         <p align="left">
             <button type="submit" class="btn btn-primary">Salvar</button>
         </p>
-    
+
     </form>
     <script>
         window.inquilinosPorCpfUrl = "{{ url('/inquilinos/por-cpf') }}";
@@ -88,9 +89,14 @@
 @endsection
 
 @section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script src="{{ asset('js/contratos.js') }}" defer></script>
-@endsection
-
-@section('scripts')
-    <script src="{{ asset('js/contratos.js') }}" defer></script>
+    <script src="{{ asset('js/mascaras.js') }}" defer></script>
+    <script>
+        $(document).ready(function () {
+            aplicarMascaras();
+        });
+    </script>
 @endsection

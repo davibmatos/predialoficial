@@ -26,7 +26,7 @@ class InquilinosController extends Controller
 
         Log::info('Buscando inquilinos com CPF:', ['cpf' => $cpf]);
 
-        $inquilinos = Inquilino::where('cpf', $cpf)->get();
+        $inquilinos = inquilino::where('cpf', $cpf)->get();
 
         Log::info('Inquilinos encontrados:', ['inquilinos' => $inquilinos]);
 

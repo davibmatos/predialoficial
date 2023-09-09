@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apartamentos;
 use App\Models\contratos;
 use App\Models\inquilino;
 use App\Models\sindico;
@@ -106,5 +107,22 @@ class ContratosController extends Controller
     {
         $item = inquilino::orderby('id', 'desc')->paginate();
         return view('painel-adm.contratos.index', ['itens' => $item, 'id' => $id]);
+    }
+
+    public function showByBuilding($id)
+    {
+        // Obtendo o imóvel pelo ID
+        $imovel = Imoveis::find($id);
+
+        // Obtendo todos os apartamentos associados a esse imóvel
+        $apartamentos = Apartamentos::where('imovel_id', $id)->get();
+
+        $statuses = Status::all();  // Se você precisa dos status, como mencionado anteriormente.
+
+        return view('painel-adm.contratos.showByBuilding', [
+            'imovel' => $imovel,
+            'apartamentos' => $apartamentos,
+            'statuses' => $statuses
+        ]);
     }
 }

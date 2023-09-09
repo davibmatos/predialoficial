@@ -67,5 +67,17 @@
         </div>
     </form>
 </div>
-
 @endsection
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="{{ asset('js/contratos.js') }}" defer></script>
+    <script src="{{ asset('js/mascaras.js') }}" defer></script>
+    <script>
+        $(document).ready(function () {
+            aplicarMascaras();
+        });
+    </script>
+@endsection
+

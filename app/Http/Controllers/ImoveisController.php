@@ -143,4 +143,14 @@ class ImoveisController extends Controller
         $item = imoveis::orderby('id', 'desc')->paginate();
         return view('painel-adm.imoveis.index', ['itens' => $item, 'id' => $id]);
     }
+
+    public function show($id)
+    {
+        $imovel = imoveis::find($id);
+        if ($imovel) {
+            return view('painel-adm.imoveis.show', ['imovel' => $imovel]);
+        } else {
+            return redirect()->route('imoveis.index')->with('error', 'Imóvel não encontrado');
+        }
+    }
 }

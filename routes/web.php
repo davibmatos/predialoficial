@@ -57,6 +57,9 @@ Route::put('imoveis/{item}', [ImoveisController::class, 'editar'])->name('imovei
 Route::get('imoveis/{item}/edit}', [ImoveisController::class, 'edit'])->name('imoveis.edit');
 Route::get('imoveis/{item}/delete}', [ImoveisController::class, 'modal'])->name('imoveis.modal');
 Route::delete('imoveis/{item}', [ImoveisController::class, 'delete'])->name('imoveis.delete');
+Route::get('imoveis/{id}/details', [ImoveisController::class, 'show'])->name('imoveis.show');
+
+
 
 //ROTAS DE APARTAMENTOS
 Route::get('apartamentos', [ApartamentosController::class, 'index'])->name('apartamentos.index');
@@ -80,6 +83,9 @@ Route::get('/imoveis/edificios', [ImoveisController::class, 'getEdificios'])->na
 Route::get('/imoveis/{edificio}/apartamentos', [ImoveisController::class, 'getApartamentos'])->name('imoveis.apartamentos');
 Route::put('/contratos/{contrato}/updateStatus', [ContratosController::class, 'updateStatus'])->name('contratos.updateStatus');
 Route::put('contratos/{contrato}/update-vencimento', [ContratosController::class, 'updateVencimento'])->name('contratos.updateVencimento');
+Route::get('/contratos/imovel/{id}', [ContratosController::class, 'showByBuilding'])->name('contratos.showByImovel');
+
+
 
 //PAINEL FINANCEIRO
 Route::get('/financeiro', [FinanceController::class, 'index'])->name('finance.index');

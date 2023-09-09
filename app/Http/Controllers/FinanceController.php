@@ -54,11 +54,9 @@ class FinanceController extends Controller
 
             if ($vencimentoDate->month == $month && $vencimentoDate->year == $year) {
                 if ($contrato->status_id == 1) {
-                    // Verificar se o contrato está "a vencer"
-                    if ($currentDay <= $vencimentoDate->day && $currentMonth == $month) {
-                        $valoresAReceber += $contrato->apartamento->valor;
-                        $apartamentosContabilizados[] = $chaveApartamento;
-                    }
+                    // Verificar se o contrato está "a vencer" no mês corrente
+                    $valoresAReceber += $contrato->apartamento->valor;
+                    $apartamentosContabilizados[] = $chaveApartamento;
                 } elseif ($contrato->status_id == 3) {
                     $pagamentoDate = Carbon::parse($contrato->updated_at);
                     if ($pagamentoDate->month == $month && $pagamentoDate->year == $year) {
@@ -81,3 +79,51 @@ class FinanceController extends Controller
         ];
     }
 }
+
+
+
+if($acao == "PASTAVINCULO" &&npjur){
+    $npjur = str_pad($npjur, 7, "0", STR_PAD_LEFT);
+    $sSqLP = "Update tem_atualiza_projuris set atualizado" = '$dData', resultado = '$situacao_robo' where npjur = '$npjur';
+    $db->Execute($sSqLP) or die ("erro");
+
+    echo json_encode("Atualizado com sucesso. NPJUR: $npjur");
+}
+
+
+$id_geusuar = 10;
+
+$script = "select * from usuario where id = $id";
+
+$resultado = $db->Execute($script) or die($script. "<br>" .$db->ErrorMsg());
+if($resultado->numRows() < 0){
+    while(!$resultado->EOF){
+
+    $sRetorno["nome"] = $resultado->fields["nome"];
+    $sRetorno["email"] = $resultado->fields["email"];
+
+    $result->MoveNext();
+    }
+}
+
+<script>
+function jsVerificaInformacao(valor){
+    var url = "verifica_informacao.php"
+    $.ajax({
+        type: "POST",
+        url: url, 
+        data: "valor="+valor,
+        dataType: 'json', 
+        success: function(data) {
+            if (data.resultado == '1') {
+                alert(data.mensagem);
+            }
+            else{
+                alert("ocorreu um erro");
+            }
+        }
+    });
+}
+<script>
+
+

@@ -24,6 +24,7 @@ class AdminController extends Controller
             $imoveisDisponiveis = $totalImoveis - $imoveisLocados;
     
             $imoveisData[] = [
+                'id' => $imovel->id,
                 'nome' => $imovel->edificio,
                 'total' => $totalImoveis,
                 'disponiveis' => $imoveisDisponiveis,

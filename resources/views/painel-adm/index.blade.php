@@ -69,28 +69,32 @@ if (@$_SESSION['nivel_usuario'] != 'admin') {
   <div class="row">
     @foreach($imoveisData as $imovelData)
       <div class="col-md-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title card-divider">{{ $imovelData['nome'] }}</h5>
-            <div class="card-stats">
-              <div class="card-stats-item">
-                <span class="card-stats-number">{{ $imovelData['disponiveis'] }}</span>
-                <span class="card-stats-label">Disponíveis</span>
-              </div>
-              <div class="card-stats-item">
-                <span class="card-stats-number">{{ $imovelData['locados'] }}</span>
-                <span class="card-stats-label">Locados</span>
-              </div>
-              <div class="card-stats-item">
-                <span class="card-stats-number">{{ $imovelData['total'] }}</span>
-                <span class="card-stats-label">Total</span>
+        <!-- Adiciona link para redirecionar para a página do imóvel -->       
+        <a href="{{ route('contratos.showByImovel', ['id' => $imovelData['id']]) }}" style="text-decoration: none; color: inherit;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title card-divider">{{ $imovelData['nome'] }}</h5>
+              <div class="card-stats">
+                <div class="card-stats-item">
+                  <span class="card-stats-number">{{ $imovelData['disponiveis'] }}</span>
+                  <span class="card-stats-label">Disponíveis</span>
+                </div>
+                <div class="card-stats-item">
+                  <span class="card-stats-number">{{ $imovelData['locados'] }}</span>
+                  <span class="card-stats-label">Locados</span>
+                </div>
+                <div class="card-stats-item">
+                  <span class="card-stats-number">{{ $imovelData['total'] }}</span>
+                  <span class="card-stats-label">Total</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </a>  <!-- Fecha a tag <a> -->
       </div>
     @endforeach
   </div>
 </div>
+
 
 @endsection
